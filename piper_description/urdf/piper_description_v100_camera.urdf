@@ -1,9 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="piper_camera">
 
-    <xacro:include filename="$(find piper_camera_moveit_config)/condfig/gazebo.xacro"/>
-
-
     <link name="arm_base">
         <inertial>
         <origin
@@ -23,6 +20,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/base_link.dae" />
         </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0" />
@@ -51,6 +51,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/link1.dae" />
         </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 1.5708" />
@@ -86,6 +89,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/link2.dae" />
         </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
             <origin xyz="0 0 0" rpy="0 0 0.1" />
@@ -121,6 +127,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/link3.dae" />
         </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
         <origin xyz="0 0 0" rpy="0 0 -1.75" />
@@ -156,6 +165,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/link4.dae" />
         </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -191,7 +203,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/link5.dae" />
         </geometry>
-
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
         <origin xyz="0 0 0" rpy="0 0 -3.14" />
@@ -227,6 +241,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/camera_v3.dae"/>
         </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
         <origin xyz="-0.002 -0.008 0" rpy="-1.57 0 0" />
@@ -262,6 +279,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/link7.dae" />
         </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
         <origin xyz="-0.001 0 0.0003" rpy="0 3.14 0" />
@@ -297,6 +317,9 @@
         <geometry>
             <mesh filename="package://piper_description/meshes/dae/link8.dae" />
         </geometry>
+        <material name="">
+            <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+        </material>
         </visual>
         <collision>
         <origin xyz="-0.001 0 0.0003" rpy="3.14 0 0" />
@@ -336,6 +359,11 @@
       <geometry>
           <box size="0.02 0.05 0.02"/>
       </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 1 1 1" />
+      </material>
     </visual>
     <collision>
       <origin
@@ -361,93 +389,4 @@
       xyz="0 0 0" />
   </joint>
 
-
-
-    <transmission name="trans_joint1">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="joint1">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="joint1_motor">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>100</mechanicalReduction>
-        </actuator>
-    </transmission>
-    <transmission name="trans_joint2">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="joint2">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="joint2_motor">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>100</mechanicalReduction>
-        </actuator>
-    </transmission>
-    <transmission name="trans_joint3">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="joint3">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="joint3_motor">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>100</mechanicalReduction>
-        </actuator>
-    </transmission>
-    <transmission name="trans_joint4">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="joint4">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="joint4_motor">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>100</mechanicalReduction>
-        </actuator>
-    </transmission>
-    <transmission name="trans_joint5">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="joint5">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="joint5_motor">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>100</mechanicalReduction>
-        </actuator>
-    </transmission>
-    <transmission name="trans_joint6">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="joint6">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="joint6_motor">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>100</mechanicalReduction>
-        </actuator>
-    </transmission>
-    <transmission name="trans_joint7">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="joint7">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="joint7_motor">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>100</mechanicalReduction>
-        </actuator>
-    </transmission>
-    <transmission name="trans_joint8">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="joint8">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="joint8_motor">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>100</mechanicalReduction>
-        </actuator>
-    </transmission>
-    <xacro:gazebo_depth_camera frame_prefix="hand_cam"/>
-
-    <gazebo>
-        <plugin filename="libgazebo_ros_control.so" name="gazebo_ros_control">
-            <robotNamespace>/</robotNamespace>
-        </plugin>
-    </gazebo>
 </robot>

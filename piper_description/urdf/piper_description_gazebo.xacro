@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <robot
-  name="gazebo"
+  name="piper"
   xmlns:xacro="http://ros.org/wiki/xacro">
 <!-- world -->
   <link name="world"/>
@@ -8,22 +8,13 @@
       <parent link="world"/>
       <child link="base_link"/>
   </joint>
-<!-- gazebo -->
+<!-- arm -->
 <link
     name="base_link">
     <inertial>
-      <origin
-        xyz="-0.00473641164191482 2.56829134630247E-05 0.041451518036016"
-        rpy="0 0 0" />
-      <mass
-        value="1.02" />
-      <inertia
-        ixx="0.00267433" 
-        ixy="-0.00000073" 
-        ixz="-0.00017389" 
-        iyy="0.00282612" 
-        iyz="0.0000004" 
-        izz="0.00089624" />
+            <origin xyz="-0.00473641164191482 2.56829134630247E-05 0.041451518036016" rpy="0 0 0" />
+            <mass value="1.02" />
+            <inertia ixx="0.00267433" ixy="-0.00000073" ixz="-0.00017389" iyy="0.00282612" iyz="0.0000004" izz="0.00089624" />
     </inertial>
     <visual>
       <origin
@@ -31,7 +22,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/base_link.STL" />
+          filename="file://$(find piper_description)/meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -45,25 +36,16 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/base_link.STL" />
+          filename="file://$(find piper_description)/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
   <link
     name="link1">
     <inertial>
-      <origin
-        xyz="0.000121504734057468 0.000104632162460536 -0.00438597309559853"
-        rpy="0 0 0" />
-      <mass
-        value="0.71" />
-      <inertia
-        ixx="0.00048916" 
-        ixy="-0.00000036" 
-        ixz="-0.00000224" 
-        iyy="0.00040472" 
-        iyz="-0.00000242" 
-        izz="0.00043982" />
+            <origin xyz="0.000121504734057468 0.000104632162460536 -0.00438597309559853" rpy="0 0 0" />
+            <mass value="0.71" />
+            <inertia ixx="0.00048916" ixy="-0.00000036" ixz="-0.00000224" iyy="0.00040472" iyz="-0.00000242" izz="0.00043982" />
     </inertial>
     <visual>
       <origin
@@ -71,7 +53,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link1.STL" />
+          filename="file://$(find piper_description)/meshes/link1.STL" />
       </geometry>
       <material
         name="">
@@ -85,7 +67,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link1.STL" />
+          filename="file://$(find piper_description)/meshes/link1.STL" />
       </geometry>
     </collision>
   </link>
@@ -110,18 +92,9 @@
   <link
     name="link2">
     <inertial>
-      <origin
-        xyz="0.198666145229743 -0.010926924140076 0.00142121714502687"
-        rpy="0 0 0" />
-      <mass
-        value="1.17" />
-      <inertia
-        ixx="0.00116918" 
-        ixy="-0.00180037" 
-        ixz="0.00025146" 
-        iyy="0.06785384" 
-        iyz="-0.00000455" 
-        izz="0.06774489" />
+            <origin xyz="0.198666145229743 -0.010926924140076 0.00142121714502687" rpy="0 0 0" />
+            <mass value="1.17" />
+            <inertia ixx="0.00116918" ixy="-0.00180037" ixz="0.00025146" iyy="0.06785384" iyz="-0.00000455" izz="0.06774489" />
     </inertial>
     <visual>
       <origin
@@ -129,7 +102,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link2.STL" />
+          filename="file://$(find piper_description)/meshes/link2.STL" />
       </geometry>
       <material
         name="">
@@ -143,7 +116,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link2.STL" />
+          filename="file://$(find piper_description)/meshes/link2.STL" />
       </geometry>
     </collision>
   </link>
@@ -169,18 +142,9 @@
   <link
     name="link3">
     <inertial>
-      <origin
-        xyz="-0.0202737662122021 -0.133914995944595 -0.000458682652737356"
-        rpy="0 0 0" />
-      <mass
-        value="0.5" />
-      <inertia
-        ixx="0.01361711" 
-        ixy="0.00165794" 
-        ixz="-0.00000048" 
-        iyy="0.00045024" 
-        iyz="-0.00000045" 
-        izz="0.01380322" />
+            <origin xyz="-0.0202737662122021 -0.133914995944595 -0.000458682652737356" rpy="0 0 0" />
+            <mass value="0.5" />
+            <inertia ixx="0.01361711" ixy="0.00165794" ixz="-0.00000048" iyy="0.00045024" iyz="-0.00000045" izz="0.01380322" />
     </inertial>
     <visual>
       <origin
@@ -188,7 +152,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link3.STL" />
+          filename="file://$(find piper_description)/meshes/link3.STL" />
       </geometry>
       <material
         name="">
@@ -202,7 +166,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link3.STL" />
+          filename="file://$(find piper_description)/meshes/link3.STL" />
       </geometry>
     </collision>
   </link>
@@ -228,18 +192,9 @@
   <link
     name="link4">
     <inertial>
-      <origin
-        xyz="-9.66635791618542E-05 0.000876064475651083 -0.00496880904640868"
-        rpy="0 0 0" />
-      <mass
-        value="0.38" />
-      <inertia
-        ixx="0.00018501" 
-        ixy="0.00000054" 
-        ixz="0.00000120" 
-        iyy="0.00018965" 
-        iyz="-0.00000841" 
-        izz="0.00015484" />
+            <origin xyz="-9.66635791618542E-05 0.000876064475651083 -0.00496880904640868" rpy="0 0 0" />
+            <mass value="0.38" />
+            <inertia ixx="0.00018501" ixy="0.00000054" ixz="0.00000120" iyy="0.00018965" iyz="-0.00000841" izz="0.00015484" />
     </inertial>
     <visual>
       <origin
@@ -247,7 +202,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link4.STL" />
+          filename="file://$(find piper_description)/meshes/link4.STL" />
       </geometry>
       <material
         name="">
@@ -261,7 +216,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link4.STL" />
+          filename="file://$(find piper_description)/meshes/link4.STL" />
       </geometry>
     </collision>
   </link>
@@ -286,18 +241,9 @@
   <link
     name="link5">
     <inertial>
-      <origin
-        xyz="-4.10554118924211E-05 -0.0566486692356075 -0.0037205791677906"
-        rpy="0 0 0" />
-      <mass
-        value="0.383" />
-      <inertia
-        ixx="0.00166169" 
-        ixy="0.00000006" 
-        ixz="-0.00000007" 
-        iyy="0.00018510" 
-        iyz="0.00001026" 
-        izz="0.00164321" />
+            <origin xyz="-4.10554118924211E-05 -0.0566486692356075 -0.0037205791677906" rpy="0 0 0" />
+            <mass value="0.383" />
+            <inertia ixx="0.00166169" ixy="0.00000006" ixz="-0.00000007" iyy="0.00018510" iyz="0.00001026" izz="0.00164321" />
     </inertial>
     <visual>
       <origin
@@ -305,7 +251,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link5.STL" />
+          filename="file://$(find piper_description)/meshes/link5.STL" />
       </geometry>
       <material
         name="">
@@ -319,7 +265,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link5.STL" />
+          filename="file://$(find piper_description)/meshes/link5.STL" />
       </geometry>
     </collision>
   </link>
@@ -344,18 +290,9 @@
   <link
     name="link6">
     <inertial>
-      <origin
-        xyz="-8.82590762930069E-05 9.0598378529832E-06 -0.002"
-        rpy="0 0 0" />
-      <mass
-        value="0.007" />
-      <inertia
-        ixx="5.73015540542155E-07" 
-        ixy="-1.98305403089247E-22"
-        ixz="-7.2791893904596E-23"
-        iyy="5.73015540542155E-07" 
-        iyz="-3.4146026640245E-24"
-        izz="1.06738869138926E-06" />
+            <origin xyz="-8.82590762930069E-05 9.0598378529832E-06 -0.002" rpy="0 0 0" />
+            <mass value="0.00699089613564366" />
+            <inertia ixx="5.73015540542155E-07" ixy="-1.98305403089247E-22" ixz="-7.2791893904596E-23" iyy="5.73015540542155E-07" iyz="-3.4146026640245E-24" izz="1.06738869138926E-06" />
     </inertial>
     <visual>
       <origin
@@ -363,7 +300,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link6.STL" />
+          filename="file://$(find piper_description)/meshes/link6.STL" />
       </geometry>
       <material
         name="">
@@ -377,7 +314,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link6.STL" />
+          filename="file://$(find piper_description)/meshes/link6.STL" />
       </geometry>
     </collision>
   </link>
@@ -421,7 +358,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/gripper_base.STL" />
+          filename="file://$(find piper_description)/meshes/gripper_base.STL" />
       </geometry>
       <material
         name="">
@@ -435,7 +372,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/gripper_base.STL" />
+          filename="file://$(find piper_description)/meshes/gripper_base.STL" />
       </geometry>
     </collision>
   </link> 
@@ -462,7 +399,7 @@
         ixx="0.00007371"
         ixy="-0.00000113"
         ixz="0.00000021"
-        iyy="0.00000781"
+        iyy="-0.00000113"
         iyz="-0.00001372"
         izz="0.0000747" />
     </inertial>
@@ -472,7 +409,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link7.STL" />
+          filename="file://$(find piper_description)/meshes/link7.STL" />
       </geometry>
       <material
         name="">
@@ -486,7 +423,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link7.STL" />
+          filename="file://$(find piper_description)/meshes/link7.STL" />
       </geometry>
     </collision>
   </link>
@@ -508,6 +445,7 @@
       effort="10"
       velocity="1" />
   </joint>
+
   <link
     name="link8">
     <inertial>
@@ -520,7 +458,7 @@
         ixx="0.00007371"
         ixy="-0.00000113"
         ixz="0.00000021"
-        iyy="0.00000781"
+        iyy="-0.00000113"
         iyz="-0.00001372"
         izz="0.0000747" />
     </inertial>
@@ -530,7 +468,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link8.STL" />
+          filename="file://$(find piper_description)/meshes/link8.STL" />
       </geometry>
       <material
         name="">
@@ -544,7 +482,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://piper_description/meshes/link8.STL" />
+          filename="file://$(find piper_description)/meshes/link8.STL" />
       </geometry>
     </collision>
   </link>
@@ -567,69 +505,130 @@
       velocity="1" />
   </joint>
 
-<!-- controller -->
-  <xacro:macro name="transmission_block" params="tran_name joint_name motor_name">
-    <transmission name="${tran_name}">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="${joint_name}">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="$motor_name">
-            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
-    </transmission>
-  </xacro:macro>
+  <!-- <gazebo reference="base_link">
+      <material>Gazebo/Black</material>
+      <gravity>true</gravity>
+      <selfCollide>false</selfCollide>
+  </gazebo>
+  <gazebo reference="link1">
+      <material>Gazebo/Gray</material>
+      <selfCollide>false</selfCollide>
+  </gazebo>
+  <gazebo reference="link2">
+      <material>Gazebo/Red</material>
+      <selfCollide>false</selfCollide>
+  </gazebo>
+  <gazebo reference="link3">
+      <material>Gazebo/Blue</material>
+  </gazebo>
+  <gazebo reference="link4">
+      <material>Gazebo/Green</material>
+  </gazebo>
+  <gazebo reference="link5">
+      <material>Gazebo/Yellow</material>
+  </gazebo>
+  <gazebo reference="link6">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="link7">
+      <material>Gazebo/Orange</material>
+  </gazebo>
+  <gazebo reference="link8">
+      <material>Gazebo/Orange</material>
+  </gazebo> -->
 
-  <xacro:transmission_block tran_name="tran1" joint_name="joint1" motor_name="motor1"/>
-  <xacro:transmission_block tran_name="tran2" joint_name="joint2" motor_name="motor2"/>
-  <xacro:transmission_block tran_name="tran3" joint_name="joint3" motor_name="motor3"/>
-  <xacro:transmission_block tran_name="tran4" joint_name="joint4" motor_name="motor4"/>
-  <xacro:transmission_block tran_name="tran5" joint_name="joint5" motor_name="motor5"/>
-  <xacro:transmission_block tran_name="tran6" joint_name="joint6" motor_name="motor6"/>
-  <xacro:transmission_block tran_name="tran7" joint_name="joint7" motor_name="motor7"/>
-  <xacro:transmission_block tran_name="tran8" joint_name="joint8" motor_name="motor8"/>
+  <ros2_control name="GazeboSystem" type="system">
+      <hardware>
+          <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+      </hardware>
+      <joint name="joint1">
+          <command_interface name="position">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position">
+              <param name="initial_value">0.0</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint2">
+          <command_interface name="position">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position">
+              <param name="initial_value">0.0</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint3">
+          <command_interface name="position">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position">
+              <param name="initial_value">0.0</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint4">
+          <command_interface name="position">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position">
+              <param name="initial_value">0.0</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint5">
+          <command_interface name="position">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position">
+              <param name="initial_value">0.0</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint6">
+          <command_interface name="position">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position">
+              <param name="initial_value">0.0</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint7">
+          <command_interface name="position">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position">
+              <param name="initial_value">0.0</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+      </joint>
+      <joint name="joint8">
+          <command_interface name="position">
+              <param name="min">-1</param>
+              <param name="max">1</param>
+          </command_interface>
+          <state_interface name="position">
+              <param name="initial_value">0.0</param>
+          </state_interface>
+          <state_interface name="velocity"/>
+      </joint>
+  </ros2_control>
+
 <!-- gazebo -->
   <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-        <robotNamespace>/gazebo</robotNamespace>
-        <legacyModeNS>true</legacyModeNS>
+    <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        <parameters> $(find piper_gazebo)/config/ros2_controllers.yaml </parameters>
+        <robot_param_node>robot_state_publisher</robot_param_node>
     </plugin>
   </gazebo>
  
-  <!-- <gazebo reference="base_link">
-    <material>Gazebo/Black</material>
-  </gazebo>
-
-  <gazebo reference="link1">
-    <material>Gazebo/White</material>
-  </gazebo>
- 
-  <gazebo reference="link2">
-    <material>Gazebo/White</material>
-  </gazebo>
-
-  <gazebo reference="link3">
-    <material>Gazebo/White</material>
-  </gazebo>
- 
-  <gazebo reference="link4">
-    <material>Gazebo/Black</material>
-  </gazebo>
- 
-  <gazebo reference="link5">
-    <material>Gazebo/White</material>
-  </gazebo>
- 
-  <gazebo reference="link6">
-    <material>Gazebo/White</material>
-  </gazebo>
- 
-  <gazebo reference="link7">
-    <material>Gazebo/Orange</material>
-  </gazebo>
- 
-  <gazebo reference="link8">
-    <material>Gazebo/Orange</material>
-  </gazebo> -->
 </robot>
