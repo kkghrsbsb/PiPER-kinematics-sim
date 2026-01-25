@@ -1,28 +1,26 @@
+# 运行 PyBullet GUI 并加载 Piper 机器人模型
+# stepSimulation() 单步正向运动学
+
 import os
 import time
 import pybullet as p
 import pybullet_data
 from core.path import PIPER_DESCRIPTION_DIR
 
-p.connect(p.GUI, options="--width=1280 --height=720")
+p.connect(p.GUI, options="--width=1920 --height=1080")
 p.setGravity(0, 0, -9.8)
 
-# 从 pybullet_data 获取环境
+# Plane
 plane_path = os.path.join(pybullet_data.getDataPath(), "plane.urdf")
 planeId = p.loadURDF(plane_path)
 
-# 
-robot_path = os.path.join(PIPER_DESCRIPTION_DIR, "urdf", "piper_description_v100_camera.urdf")
+# Robot
+robot_path = os.path.join(PIPER_DESCRIPTION_DIR, "urdf", "piper_description.urdf")
 robotId = p.loadURDF(robot_path, [0, 0, 0], useFixedBase=True, globalScaling=5)
 
-def blsleep(timer: float):
-   delay_mark = time.time()
-   while True:
-       offset = time.time() - delay_mark
-       if offset > timer:
-           break
-for i in range(10000):
+simulation_time = 100.0  # 设置仿真时间(秒)
+for i in range(int(simulation_time * 240)):
    p.stepSimulation()
-   blsleep(0.005)
+   time.sleep(1./240.)  # 240 Hz
 
 p.disconnect()

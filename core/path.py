@@ -15,3 +15,6 @@ CONFIG_DIR = ROOT / "configs"
 ROBOTS_DIR = ASSETS_DIR / "robots"
 
 PIPER_DESCRIPTION_DIR = ROBOTS_DIR / "piper_description"
+
+# ./assets/robots/piper_description/urdf
+PIPER_DESCRIPTION_URDF_DIR = PIPER_DESCRIPTION_DIR / "urdf"
