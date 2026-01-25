@@ -5,8 +5,8 @@ description = "kinematics simulation of piper arm"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "numpy>=2.2.6",
-    "pybullet == 3.0.6",
-    "requests>=2.32.5",
-    "scipy>=1.15.3",
+    "numpy==2.2.6",
+    "pybullet==3.0.6",
+    "requests==2.32.5",
+    "scipy==1.15.3",
 ]
