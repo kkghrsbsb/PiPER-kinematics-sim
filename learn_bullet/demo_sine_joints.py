@@ -10,50 +10,57 @@ import pybullet_data
 
 from core.path import PIPER_DESCRIPTION_DIR
 
+
 # 将关节类型（整数）转换为可读的字符串名称
 def joint_type_name(joint_type: int) -> str:
     m = {
-        p.JOINT_REVOLUTE: "REVOLUTE",        # 转动关节
-        p.JOINT_PRISMATIC: "PRISMATIC",      # 移动关节
-        p.JOINT_SPHERICAL: "SPHERICAL",      # 球关节
-        p.JOINT_PLANAR: "PLANAR",            # 平面关节
-        p.JOINT_FIXED: "FIXED",              # 固定关节
+        p.JOINT_REVOLUTE: "REVOLUTE",  # 转动关节
+        p.JOINT_PRISMATIC: "PRISMATIC",  # 移动关节
+        p.JOINT_SPHERICAL: "SPHERICAL",  # 球关节
+        p.JOINT_PLANAR: "PLANAR",  # 平面关节
+        p.JOINT_FIXED: "FIXED",  # 固定关节
         p.JOINT_POINT2POINT: "POINT2POINT",  # 点对点关节（球链约束）
-        p.JOINT_GEAR: "GEAR",                # 齿轮/传动约束
+        p.JOINT_GEAR: "GEAR",  # 齿轮/传动约束
     }
     return m.get(joint_type, f"UNKNOWN({joint_type})")
 
 
-# 打印机器人所有关节的信息，包括索引、名称、类型和限制
+# 打印机器人所有关节的信息, 包括索引、名称、类型、限制和初始参数
 def print_all_joints(robot_id: int) -> None:
     n = p.getNumJoints(robot_id)
     print(f"\n[Joint Summary] numJoints={n}\n")
+    print(f"{'idx'}  {'j_name':<24s}  {'j_type':<10s}  {'limit':<22s}  {'q':<3s}  {'qd':<3s}")
     for j in range(n):
         info = p.getJointInfo(robot_id, j)
         # getJointInfo returns a tuple; key fields:
-        #  0 jointIndex, 1 jointName, 2 jointType, 8 lowerLimit, 9 upperLimit
+        # 0 jointIndex, 1 jointName, 2 jointType, 8 lowerLimit, 9 upperLimit
         idx = info[0]
-        name = info[1].decode("utf-8")
-        jtype = info[2]
+        j_name = info[1].decode("utf-8")
+        j_type = info[2]
         lower, upper = info[8], info[9]
+        limit_str = f"[{lower:.6f}, {upper:.6f}]"
 
-        # For FIXED joints, limits are often (0, -1) or similar; keep printing anyway.
-        print(
-            f"idx={idx:2d}  name={name:<24s}  type={joint_type_name(jtype):<10s}  limit=[{lower:.6f}, {upper:.6f}]"
-        )
+        # q: origin position(位置/角度)  qd: origin velocity(速度)
+        q, qd = p.getJointState(robot_id, j)[:2]
+
+        print(f"{idx:<3d}  {j_name:<24s}  {joint_type_name(j_type):<10s}  {limit_str:<22s}  {q}  {qd}")
     print("")
+
 
 # 若使用 piper_description.urdf
 #
-# idx= 0  name=joint1                    type=REVOLUTE    limit=[-2.618000, 2.168000]
-# idx= 1  name=joint2                    type=REVOLUTE    limit=[0.000000, 3.140000]
-# idx= 2  name=joint3                    type=REVOLUTE    limit=[-2.967000, 0.000000]
-# idx= 3  name=joint4                    type=REVOLUTE    limit=[-1.745000, 1.745000]
-# idx= 4  name=joint5                    type=REVOLUTE    limit=[-1.220000, 1.220000]
-# idx= 5  name=joint6                    type=REVOLUTE    limit=[-2.094400, 2.094400]
-# idx= 6  name=joint6_to_gripper_base    type=FIXED       limit=[0.000000, -1.000000]
-# idx= 7  name=joint7                    type=PRISMATIC   limit=[0.000000, 0.175000]
-# idx= 8  name=joint8                    type=PRISMATIC   limit=[-0.175000, 0.000000]
+# [Joint Summary] numJoints=9
+#
+# idx  j_name                    j_type      limit                   q    qd
+# 0    joint1                    REVOLUTE    [-2.618000, 2.168000]   0.0  0.0
+# 1    joint2                    REVOLUTE    [0.000000, 3.140000]    0.0  0.0
+# 2    joint3                    REVOLUTE    [-2.967000, 0.000000]   0.0  0.0
+# 3    joint4                    REVOLUTE    [-1.745000, 1.745000]   0.0  0.0
+# 4    joint5                    REVOLUTE    [-1.220000, 1.220000]   0.0  0.0
+# 5    joint6                    REVOLUTE    [-2.094400, 2.094400]   0.0  0.0
+# 6    joint6_to_gripper_base    FIXED       [0.000000, -1.000000]   0.0  0.0
+# 7    joint7                    PRISMATIC   [0.000000, 0.175000]    0.0  0.0
+# 8    joint8                    PRISMATIC   [-0.175000, 0.000000]   0.0  0.0
 #
 
 # 选择两个转动关节
@@ -66,6 +73,7 @@ def pick_two_revolute_joints(robot_id: int):
     if len(revolutes) == 0:
         raise RuntimeError("No REVOLUTE joints found.")
     j0 = revolutes[0]
+    # 如果只有一个转动关节，后续对 j0/j1 做的操作都落在其同一个关节上
     j1 = revolutes[1] if len(revolutes) > 1 else revolutes[0]
     return j0, j1
 
@@ -94,22 +102,29 @@ def main():
     j0_name = p.getJointInfo(robot_id, j0)[1].decode("utf-8")
     j1_name = p.getJointInfo(robot_id, j1)[1].decode("utf-8")
     print(f"[Demo] Driving joints: {j0}({j0_name}), {j1}({j1_name})\n")
+    # [Demo] Driving joints: 0(joint1), 1(joint2)
 
     # 电机控制参数
     dt = 1.0 / 240.0
-    freq_hz = 0.25                 # sine frequency
-    w = 2.0 * math.pi * freq_hz
-    amp = 0.8                      # radians (adjust if your joint limits are tight)
-    phase = math.pi / 2.0
-    max_force = 80                 # increase if it barely moves
-    max_vel = 2.0                  # rad/s, optional
+    freq_hz = 0.25
+    w = 2.0 * math.pi * freq_hz  # 角频率
+    amp = 0.8  # 振幅 (按关节限制调整)
+    phase = math.pi / 2.0  # 初相位
+    max_force = 80  # N, 最大驱动力
+    max_vel = math.pi  # rad/s, 最大关节速度
 
     simulation_time = 20.0
 
     for i in range(int(simulation_time * 240)):
         t = i * dt
 
+        # 错限位, 运动更自然
+
+        # joint1 limit=[-2.618000, 2.168000]
         target0 = amp * math.sin(w * t)
+
+        # joint2 limit=[0.000000, 3.140000]
+        # FIXME: 目标是正弦, 但关节有下限 0
         target1 = 0.6 * amp * math.sin(w * t + phase)
 
         p.setJointMotorControl2(

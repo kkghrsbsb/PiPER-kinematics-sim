@@ -1,4 +1,4 @@
-# 对两个转动关节做正弦小幅运动
+# 对两个转动关节做正弦小幅运动(根据真实时间)
 # setRealTimeSimulation(1) 模式
 # 根据物理服务器的实时时钟自动运行正向动力学仿真
 
@@ -16,10 +16,10 @@ from learn_bullet.demo_sine_joints import print_all_joints, pick_two_revolute_jo
 def main():
     p.connect(p.GUI, options="--width=1920 --height=1080")
 
-    # 物理参数（仍然建议设置；实时模式下 Bullet 会内部步进）
     p.setGravity(0, 0, -9.8)
     p.setRealTimeSimulation(0)  # 先关，加载完再开，避免加载时抖动
 
+    # Optional: nicer camera
     p.resetDebugVisualizerCamera(
         cameraDistance=1.8,
         cameraYaw=45,
@@ -50,15 +50,18 @@ def main():
     amp = 0.8
     phase = math.pi / 2.0
     max_force = 80
-    max_vel = 2.0
+    max_vel = math.pi
 
-    # 开启实时仿真：之后不要再 stepSimulation()
+    # 开启实时仿真: 之后不要再 stepSimulation()
     p.setRealTimeSimulation(1)
 
     # 用真实时间驱动正弦（用 perf_counter 更稳）
     t0 = time.perf_counter()
+
     simulation_time = 20.0
-    period = 1.0 / 240.0  # 你给控制指令的频率（不是物理步进频率）
+
+    # 需要给控制指令的频率（不是物理步进频率）
+    period = 1.0 / 240.0
     next_tick = time.perf_counter()
 
     try:
